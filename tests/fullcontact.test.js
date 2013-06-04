@@ -3,6 +3,7 @@ var fullcontact = require("../lib/fullcontact")(key.key());
 
 var validEmail = "bart@fullcontact.com";
 var invalidEmail = "notvalid@fullcontact.com";
+var invalidEmailMD5 = "f7fd228396921f57689774c5ff99008a";
 
 exports.url = {
 	//perform a few basic tests on baseurl to make sure that it will construct the url as expected
@@ -52,6 +53,40 @@ exports.personFindByEmail = {
 	 */
 	testInvalidEmail: function(test) {
 		fullcontact.person.findByEmail(invalidEmail, function(err, json) {
+			test.equals(err, null);
+			//Status and message are always set in the API
+			test.notEqual(json.status, undefined);
+			test.notEqual(json.message, undefined);
+			//Rest of the response is up in the air, it could be 202 or 404 based on timing
+			if(json.status != 202 && json.status != 404)
+			{
+				test.okay(false, "Status is not 202 or 404");
+			}
+			test.done();
+		});
+	},
+	/*
+	 * Tests using a string that isn't an email
+	 * Expect - Either 422 status and a message
+	 */
+	testNotAnEmail: function(test) {
+		fullcontact.person.findByEmail("asdf", function(err, json) {
+			test.equals(err, null);
+			//Status and message are always set in the API
+			test.notEqual(json.message, undefined);
+			test.equals(json.status, 422);
+			test.done();
+		});
+	}
+}
+
+exports.personFindByEmailMD5 = {
+	/*
+	 * Tests using an invalid emailMD5
+	 * Expect - Either 202 or 404 response and a message
+	 */
+	testInvalidEmailMD5: function(test) {
+		fullcontact.person.findByEmailMD5(invalidEmailMD5, function(err, json) {
 			test.equals(err, null);
 			//Status and message are always set in the API
 			test.notEqual(json.status, undefined);

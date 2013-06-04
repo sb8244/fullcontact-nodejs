@@ -18,7 +18,7 @@ Nodeunit is used for testing. There is a runtests script which will execute any 
 **This library is not complete but here is the active todo list.**
 
 *  For the Person resource
- *  Implement lookup by email and emailMD5
+ *  ~~Implement lookup by email and emailMD5~~
   *  Implement style for outputting (lookup by email only)
  *  Implement lookup by phone
   *  Implement countryCode for non-US/Canada phone numbers
