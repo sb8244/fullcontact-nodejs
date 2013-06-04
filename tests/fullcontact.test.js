@@ -4,8 +4,8 @@ var fullcontact = require("../lib/fullcontact")(key.key());
 var validEmail = "bart@fullcontact.com";
 var invalidEmail = "notvalid@fullcontact.com";
 
-//perform a few basic tests on baseurl to make sure that it will construct the url as expected
 exports.url = {
+	//perform a few basic tests on baseurl to make sure that it will construct the url as expected
 	baseUrl: function(test) {
 		var count = 0;
 		var cb = function() {
@@ -26,7 +26,6 @@ exports.url = {
 	}
 }
 
-//Test the execute command which should issue a get request based on the endpoint and opts
 exports.execute = {
 	/* 
 	 * Send a fake request to person.json endpoint with a valid email but without a valid apikey
