@@ -2,6 +2,7 @@ var key = require("./key");
 var fullcontact = require("../lib/fullcontact")(key.key());
 
 var validEmail = "bart@fullcontact.com";
+var queueEmail = "queue@fullcontact.com";
 var invalidEmail = "notvalid@fullcontact.com";
 var invalidEmailMD5 = "f7fd228396921f57689774c5ff99008a";
 
@@ -96,6 +97,35 @@ exports.personFindByEmailMD5 = {
 			{
 				test.okay(false, "Status is not 202 or 404");
 			}
+			test.done();
+		});
+	}
+}
+
+exports.personQueueEmail = {
+	/*
+	 * Tests using an invalid email
+	 * Expect - 202 status and a message
+	 */
+	testInvalidEmail: function(test) {
+		fullcontact.person.queueEmail(queueEmail, function(err, json) {
+			test.equals(err, null);
+			//Status and message are always set in the API
+			test.equals(json.status, 202);
+			test.notEqual(json.message, undefined);
+			test.done();
+		});
+	},
+	/*
+	 * Tests using a string that isn't an email
+	 * Expect - Either 422 status and a message
+	 */
+	testNotAnEmail: function(test) {
+		fullcontact.person.queueEmail("asdf", function(err, json) {
+			test.equals(err, null);
+			//Status and message are always set in the API
+			test.notEqual(json.message, undefined);
+			test.equals(json.status, 422);
 			test.done();
 		});
 	}
