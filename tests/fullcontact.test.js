@@ -7,6 +7,7 @@ var invalidEmail = "notvalid@fullcontact.com";
 var invalidEmailMD5 = "f7fd228396921f57689774c5ff99008a";
 var validPhone = "+13037170414";
 var invalidPhone = "+15555555555";
+var validTwitter = "lorangb";
 
 exports.url = {
 	//perform a few basic tests on baseurl to make sure that it will construct the url as expected
@@ -148,7 +149,10 @@ exports.personPhone = {
 	}
 }
 
-exports.queuePhone = {
+exports.personQueuePhone = {
+	/*
+	 * This phone number should be detected as invalid
+	 */
 	testInvalidPhone: function(test) {
 		fullcontact.person.queuePhone(invalidPhone, "US", function(err, json) {
 			test.equals(err, null);
@@ -158,8 +162,33 @@ exports.queuePhone = {
 			test.done();
 		});
 	},
+	/*
+	 * Status should always be 202 with a message
+	 */
 	testValidPhone: function(test) {
 		fullcontact.person.queuePhone(validPhone, "US", function(err, json) {
+			test.equals(err, null);
+			//Status and message are always set in the API
+			test.equals(json.status, 202);
+			test.notEqual(json.message, undefined);
+			test.done();
+		});
+	}
+}
+
+/*
+ * Implement after the switch to allowing free test lookups
+ */
+exports.personTwitter = {
+
+}
+
+exports.personQueueTwitter = {
+	/*
+	 * Status should always be 202 with a message
+	 */
+	testValidHandle: function(test) {
+		fullcontact.person.queueTwitter(validTwitter, function(err, json) {
 			test.equals(err, null);
 			//Status and message are always set in the API
 			test.equals(json.status, 202);
