@@ -1,1 +1,1 @@
-modules.exports = require("./lib/fullcontact");
+module.exports = require("./lib/fullcontact");

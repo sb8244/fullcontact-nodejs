@@ -1,8 +1,16 @@
 {
-  "name": "fullcontact",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-  	"nodeunit": "*"
-  }
+  "name": "fullcontact-api",
+  "version": "0.0.3",
+  "private": false,
+  "keywords": ["fullcontact"],
+  "files": ["index.js", "lib", "package.json"],
+  "author": {
+    "name": "Stephen Bussey",
+    "email": "sb8244@cs.ship.edu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/sb8244/fullcontact-nodejs.git"
+  },
+  "readmeFilename": "README.md"
 }

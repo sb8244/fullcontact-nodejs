@@ -7,14 +7,14 @@ Much of this readme is taken from the FullContact PHP API - https://github.com/f
 
 ## Requirements
 
-This assumes you have nodejs installed and setup properly. It is not yet in npm but will be at a later point in time, when it is more stable. 
+This assumes you have nodejs installed and setup properly. There are no code dependencies otherwise. You should be signed up with www.fullcontact.com.
 
 ## Usage
 
 The test suites provide demonstrations of every single type of request call available. The first step is to include fullcontact by requiring it. However, the key must be passed as a parameter:
 
 ```javascript
-var fullcontact = require("fullcontact")("Your Key here");
+var fullcontact = require("fullcontact-api")("Your Key here");
 ```
 
 You can setup the key file a few ways, see the test suite for an example of using a key config file, or just hardcode it in.
