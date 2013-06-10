@@ -9,9 +9,27 @@ Much of this readme is taken from the FullContact PHP API - https://github.com/f
 
 This assumes you have nodejs installed and setup properly. It is not yet in npm but will be at a later point in time, when it is more stable. 
 
+## Usage
+
+The test suites provide demonstrations of every single type of request call available. The first step is to include fullcontact by requiring it. However, the key must be passed as a parameter:
+
+```javascript
+var fullcontact = require("fullcontact")("Your Key here");
+```
+
+You can setup the key file a few ways, see the test suite for an example of using a key config file, or just hardcode it in.
+
+Next, you can execute an endpoint api as follows:
+```javascript
+fullcontact.person.findByEmail("email", function(err, json) {
+	//json now contains your information unless err
+});
+```
+A full list of the available API will be prepared shortly.
+
 ## Testing
 
-Nodeunit is used for testing. There is a runtests script which will execute any *.test.js file outside of node_modules.
+Nodeunit is used for testing. There is a runtests script which will execute any *.test.js file outside of node_modules. You must setup the key for testing by placing your key in the key.config.js file and then renaming it to key.js
 
 ## TODO
 
